@@ -1,6 +1,5 @@
-# Nome: 
-sistemaLeilao
-# Descricao: 
+# sistemaLeilao
+Descricao: 
 Sistema informatizado para automatização de rotinas de uma casa de leilões
-# Tecnologias: 
+Tecnologias: 
 Java e MySQL
