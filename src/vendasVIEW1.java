@@ -11,12 +11,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Usuario
  */
-public class vendasVIEW extends javax.swing.JFrame {
+public class vendasVIEW1 extends javax.swing.JFrame {
 
     /**
      * Creates new form VendasVIEW
      */
-    public vendasVIEW() {
+    public vendasVIEW1() {
         initComponents();
         listarVendas();
     }
