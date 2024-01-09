@@ -77,7 +77,7 @@ public class ProdutosDAO {
         return listagem;
     }
     
-    public ArrayList<ProdutosDTO> listarProdutosVendidos(){
+    public ArrayList<ProdutosDTO> listarVendas(){
         conn = new conectaDAO().connectDB();
         try{
          Statement st = conn.createStatement();
