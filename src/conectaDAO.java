@@ -17,18 +17,18 @@ import javax.swing.JOptionPane;
  * @author Adm
  */
 public class conectaDAO {
-    private String user = "";
-    private String password = "";
+    static String user = "";
+    static String password = "";
     
     public boolean setupPassword(){
         user = JOptionPane.showInputDialog("Informe o usuario da base de dados");
         password = JOptionPane.showInputDialog("Informe a senha da base de dados");
-        
         if (this.connectDB() == null) return false;
         else return true;
     }
-        
+
     public Connection connectDB(){
+        
         Connection conn = null;
         
         try {
