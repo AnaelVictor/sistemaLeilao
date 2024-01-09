@@ -9,11 +9,12 @@
  */
 
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.Connection;
-import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class ProdutosDAO {
     
@@ -23,14 +24,23 @@ public class ProdutosDAO {
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
     
     public void cadastrarProduto (ProdutosDTO produto){
-        
-        
-        //conn = new conectaDAO().connectDB();
-        
-        
+
+        conn = new conectaDAO().connectDB();
+         try{
+            PreparedStatement ps = conn.prepareStatement("insert into produtos values(0,?,?,?)");
+            ps.setString(1, produto.getNome()); 
+            ps.setInt(2, produto.getValor()); 
+            ps.setString(3,produto.getStatus());
+            ps.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso! :D");
+            } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Ocorreu um problema ao adicionar o produto :(");
+            System.out.println(e);
+        }
     }
     
-    public ArrayList<ProdutosDTO> listarProdutos(){
+        public ArrayList<ProdutosDTO> listarProdutos(){
         
         return listagem;
     }

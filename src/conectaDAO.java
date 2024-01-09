@@ -1,4 +1,5 @@
 
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -19,13 +20,25 @@ public class conectaDAO {
     
     public Connection connectDB(){
         Connection conn = null;
+        String password =  "";
+        String user = "root";
         
         try {
-        
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/uc11?user=root&password=938%r0__W3e8u");
-            
+         Class.forName("com.mysql.cj.jdbc.Driver");
+         
+         String encpassword = "";
+             try{
+             encpassword = URLEncoder.encode(password, "UTF-8");
+         }catch(Exception e){System.out.println("failed to encode connectuon url: "+e);}
+             
+         String url = "jdbc:mysql://localhost/uc11?user="+user+"&password="+encpassword+"&useTimezone=true&serverTimezone=UTC&useSSL=false";
+         
+         conn = DriverManager.getConnection(url); 
+         
         } catch (SQLException erro){
             JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
+        } catch (ClassNotFoundException e){
+            JOptionPane.showMessageDialog(null, "Erro ao conectar: driver mysql nao encontrado");
         }
         return conn;
     }
