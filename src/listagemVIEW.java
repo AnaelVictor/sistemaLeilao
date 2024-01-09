@@ -220,6 +220,7 @@ public class listagemVIEW extends javax.swing.JFrame {
                 });
             }
         } catch (Exception e) {
+            System.out.println("erro ao listar prods: "+e);
         }
     
     }
