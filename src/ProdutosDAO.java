@@ -39,7 +39,21 @@ public class ProdutosDAO {
             System.out.println(e);
         }
     }
-    
+        public void venderProduto (int id){
+
+        conn = new conectaDAO().connectDB();
+         try{
+            PreparedStatement ps = conn.prepareStatement("update produtos set status = 'Vendido' where id = ?");
+            ps.setInt(1, id); 
+            ps.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Produto vendido com sucesso! $$");
+            } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Ocorreu um problema ao adicionar o produto :(");
+            System.out.println(e);
+        }
+    }
+        
     public ArrayList<ProdutosDTO> listarProdutos(){
         conn = new conectaDAO().connectDB();
         try{
@@ -62,6 +76,7 @@ public class ProdutosDAO {
 
         return listagem;
     }
+    
     
     
     
