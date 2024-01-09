@@ -16,6 +16,10 @@ public class cadastroVIEW extends javax.swing.JFrame {
      * Creates new form cadastroVIEW
      */
     public cadastroVIEW() {
+        conectaDAO conector = new conectaDAO();
+        if (!conector.setupPassword()){
+            System.exit(0);
+        }
         initComponents();
     }
 

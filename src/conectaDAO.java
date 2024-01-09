@@ -17,30 +17,42 @@ import javax.swing.JOptionPane;
  * @author Adm
  */
 public class conectaDAO {
+    private String user = "";
+    private String password = "";
     
+    public boolean setupPassword(){
+        user = JOptionPane.showInputDialog("Informe o usuario da base de dados");
+        password = JOptionPane.showInputDialog("Informe a senha da base de dados");
+        
+        if (this.connectDB() == null) return false;
+        else return true;
+    }
+        
     public Connection connectDB(){
         Connection conn = null;
-        String password =  "";
-        String user = "root";
         
         try {
          Class.forName("com.mysql.cj.jdbc.Driver");
          
-         String encpassword = "";
-             try{
-             encpassword = URLEncoder.encode(password, "UTF-8");
-         }catch(Exception e){System.out.println("failed to encode connectuon url: "+e);}
-             
+         String encpassword = this.encrypt(password);
          String url = "jdbc:mysql://localhost/uc11?user="+user+"&password="+encpassword+"&useTimezone=true&serverTimezone=UTC&useSSL=false";
          
          conn = DriverManager.getConnection(url); 
          
         } catch (SQLException erro){
-            JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao conectar: " + erro.getMessage());
         } catch (ClassNotFoundException e){
             JOptionPane.showMessageDialog(null, "Erro ao conectar: driver mysql nao encontrado");
         }
         return conn;
     }
     
+    public String encrypt(String str){
+         String enc = "";
+         try{
+             enc = URLEncoder.encode(str, "UTF-8");
+         }catch(Exception e){System.out.println("failed to encode connectuon url: "+e);}
+         return enc;
+    }
+   
 }
